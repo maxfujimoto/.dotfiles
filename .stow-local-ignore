@@ -1,0 +1,10 @@
+# Git
+\.git
+
+# Emacs
+.+~
+\#.*\#
+^/.*\.org
+
+# Backup Files
+.*-bak
