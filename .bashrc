@@ -32,10 +32,16 @@ set -o noclobber
 
 ##Aliases##
 
-alias ll="ls -la"
+alias ll="ls -lA"
+alias lsa="ls -A"
 alias v="vim"
+alias V="sudo vim"
 alias rv="sudo vim"
 alias e="emacs -nw"
-alias p="sudo pacman"
+alias p="pacman"
+alias P="sudo pacman"
 alias mount="mount |column -t"
 alias del="mv --force -t ~/.Trash"
+alias code="cd ~/Code/"
+alias ccode="cd ~/Code/C/00_Projects/"
+alias t="./test"
