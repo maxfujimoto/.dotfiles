@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+# CreateLinks
+#
+
+# Create machine specific config links in .dotfiles.
+case "$1" in
+    desktop) ln -sf "$HOME/.dotfiles/Options/Xinitrc/.xinitrc-$1" "$HOME/.xinitrc" 
+             ln -sf "$HOME/.dotfiles/Options/Xmodmap/.Xmodmap-$1" "$HOME/.Xmodmap" 
+             ln -sf "$HOME/.dotfiles/Options/Xresources/.Xresources-$1" "$HOME/.Xresources" 
+;;
+     laptop) ln -sf "$HOME/.dotfiles/Options/Xinitrc/.xinitrc-$1" "$HOME/.xinitrc" 
+             ln -sf "$HOME/.dotfiles/Options/Xmodmap/.Xmodmap-$1" "$HOME/.Xmodmap" 
+             ln -sf "$HOME/.dotfiles/Options/Xresources/.Xresources-$1" "$HOME/.Xresources" 
+;;
+esac

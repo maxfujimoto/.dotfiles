@@ -1,0 +1,69 @@
+!!
+!!~/.Xresources
+!!
+
+
+!	!!X!!
+!Xft.antialias: true
+!Xft.rgba: rgb
+Xft.dpi: 107					!!def: 96
+
+
+!	 !!dwm!!
+dwm.font: monospacesize=10
+dwm.dmenufont: monospacesize=10
+dwm.normbgcolor: #222222
+dwm.normbordercolor: #444444
+dwm.normfgcolor: #bbbbbb
+dwm.selbgcolor: #eeeeee 
+dwm.selbordercolor: #fd5300
+dwm.selfgcolor: #eeeeee
+!dwm.normbarcolor:
+!!greens 002703 004317, 003010,
+dwm.selbarcolor: #032701
+dwm.seltagcolor: #777777
+!dwm.borderpxp: 
+!dwm.snap: 
+dwm.showbar: 1
+dwm.topbar: 1
+!dwm.nmaster: 
+!dwm.resizehints: 
+!dwm.mfact:
+dwm.volumekeyup: XF86XK_AudioRaiseVolume
+dwm.volumekeydown: XF86XK_AudioLowervolume
+dwm.volumekeymute: Xf86XK_AudioMute
+dwm.volumefunc: volumehp
+
+
+!	!!st!!
+st.alpha: 0.87
+st.font: Roboto Mono:pixelsize=13:antialias=true:autohint=true
+!st.color0: #0000ff
+!st.color1: #ffff00
+!st.color2: #00ffff
+!st.color3: #00ff00
+!st.color4: #888800
+!st.color5: #008888
+!st.color6: #880088
+!st.color7: #888888
+!st.color8: #ff0000
+!st.color9: #00ff00
+!st.color10: #00ff00
+!st.color11: #ff0000
+!st.color12: #ff00ff
+!st.color13: #0000ff
+!st.color14: #005577
+!st.color15: #00ffff
+!st.background: #880000
+!st.foreground: #008800
+!st.cursorColor: #000088
+!st.termname: 
+!st.shell: 
+!st.minlatency: 
+!st.maxlatency: 
+!st.blinktimeout: 
+!st.bellvolume: 
+!st.tabspaces: 
+st.borderpx: 7
+!st.cwscale: 
+!st.chscale:
