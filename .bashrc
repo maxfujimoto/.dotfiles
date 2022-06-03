@@ -6,11 +6,19 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-##Gui##
+# Paths
+export PATH="${PATH}:/$HOME/.local/bin"
+
+# XDG
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+# export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+# gpg2 --homedir "$XDG_DATA_HOME"/gnupg
+# nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings
+
 
 # Prompt #
-
-# alias ls='ls --color=auto'
 
 # No color
 # PS1='[\u@\h \W]\$ '
@@ -45,3 +53,7 @@ alias del="mv --force -t ~/.Trash"
 alias code="cd ~/Code/"
 alias ccode="cd ~/Code/C/00_Projects/"
 alias t="./test"
+alias e="emacs -nw"
+alias upsync="rsync -avhu --progress"
+alias arcsync="rsync -avh --progress"
+alias fdiff="diff --brief --recursive"
