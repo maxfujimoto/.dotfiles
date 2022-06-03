@@ -10,10 +10,12 @@ case "$1" in
              ln -sf "$HOME/.dotfiles/Options/Xmodmap/.Xmodmap-$1" "$HOME/.Xmodmap" 
              ln -sf "$HOME/.dotfiles/Options/Xresources/.Xresources-$1" "$HOME/.Xresources" 
              ln -sf "$HOME/.dotfiles/Options/GitConfig/.gitconfig-$1" "$HOME/.gitconfig" 
+             ln -sf "$HOME/.dotfiles/Options/GitConfig/.gitconfig-$1" "$HOME/.config/git/config" 
 ;;
      laptop) ln -sf "$HOME/.dotfiles/Options/Xinitrc/.xinitrc-$1" "$HOME/.xinitrc" 
              ln -sf "$HOME/.dotfiles/Options/Xmodmap/.Xmodmap-$1" "$HOME/.Xmodmap" 
              ln -sf "$HOME/.dotfiles/Options/Xresources/.Xresources-$1" "$HOME/.Xresources" 
              ln -sf "$HOME/.dotfiles/Options/GitConfig/.gitconfig-$1" "$HOME/.gitconfig" 
+             ln -sf "$HOME/.dotfiles/Options/GitConfig/.gitconfig-$1" "$HOME/.config/git/config" 
 ;;
 esac
