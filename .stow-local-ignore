@@ -1,5 +1,6 @@
 # Git
 \.git
+\.gitignore
 
 # Emacs
 .+~
@@ -7,4 +8,7 @@
 ^/.*\.org
 
 # Backup Files
-.*-bak
+.*bak$
+
+# Machine Specific Options
+/Options
