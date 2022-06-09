@@ -10,7 +10,7 @@ Xft.dpi: 107					!!def: 96
 
 
 !	 !!dwm!!
-dwm.font: monospacesize=10
+dwm.font: Cantarel:monospacesize=10
 dwm.dmenufont: monospacesize=10
 dwm.normbgcolor: #222222
 dwm.normbordercolor: #444444
