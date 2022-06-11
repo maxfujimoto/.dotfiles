@@ -27,9 +27,6 @@ unclutter -idle 7 &
 # Set Background
 feh --bg-scale ~/Pictures/Backgrounds/skellig_michael.jpg &
 
-# K95 supporot
-sudo ckb-next-daemon &
-
 # BG Color BROKEN
 # xsetroot -bg "#000000" &
 

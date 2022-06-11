@@ -37,7 +37,8 @@ dwm.volumefunc: volumehp
 
 !	!!st!!
 st.alpha: 0.87
-st.font: Roboto Mono:pixelsize=13:antialias=true:autohint=true
+!st.font: Roboto Mono:mosnospacesize=13:antialias=true:autohint=true
+st.font: DejaVuSansMono-Oblique:size=13:antialias=true:autohint=true
 !st.color0: #0000ff
 !st.color1: #ffff00
 !st.color2: #00ffff
@@ -67,3 +68,11 @@ st.font: Roboto Mono:pixelsize=13:antialias=true:autohint=true
 st.borderpx: 7
 !st.cwscale: 
 !st.chscale:
+
+
+!	!!dmenu!!
+dmenu.font: Cantarel:monospacesize=10
+!dmenu.background:
+!dmenu.foreground:
+!dmenu.selbackground:
+!dmenu.selforeground:
