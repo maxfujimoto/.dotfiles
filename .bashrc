@@ -36,28 +36,43 @@ export PROMPT_DIRTRIM=2
 
 ##Behavior##
 
+# Completion
+# complete -cf sudo
+
 # Changes > overwrite to >|
 set -o noclobber
 
 ##Aliases##
 
+# Navigation
 alias ll="ls -lA"
 alias lsa="ls -A"
-alias v="vim"
-alias V="sudo vim"
-alias rv="sudo vim"
-alias e="emacs -nw"
-alias p="pacman"
-alias P="sudo pacman"
 alias mount="mount |column -t"
 alias del="mv --force -t ~/.Trash"
 alias code="cd ~/Code/"
 alias ccode="cd ~/Code/C/00_Projects/"
-alias t="./test"
+alias cl="cd $1 && ll"
+
+# Editors
+alias n="nvim"
+alias v="vim"
+alias V="sudo vim"
+alias rv="sudo vim"
 alias e="emacs -nw"
+
+# Packages
+alias p="pacman"
+alias P="sudo pacman"
+
+# Tools
+alias t="./test"
 alias upsync="rsync -auvh --progress"
 alias rrsync="rsync -rvh --progress"
 alias arcsync="rsync -avh --progress"
 alias fdiff="diff --brief --recursive"
-alias n="nvim"
 alias sd="sudo powerprompt"
+alias hist="cat ~/.bash_history | fzf"
+
+# Confiugre and Update
+alias xres="vim ~/.Xresources; xrdb ~/.Xresources & echo 'xrdb ~/.Xresources'"
+alias bashrc="vim ~/.bashrc; source ~/.bashrc & echo 'source ~/.bashrc'"
