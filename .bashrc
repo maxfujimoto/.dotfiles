@@ -44,14 +44,16 @@ set -o noclobber
 
 ##Aliases##
 
-# Navigation
-alias ll="ls -lA"
-alias lsa="ls -A"
+# Navigatin
+alias l='echo -e "\n\n"; ls; echo -e "\n\n"'
+alias ll="ls -A"
+alias lsa='echo -e "\n"; ls -lA; echo -e "\n"'
 alias mount="mount |column -t"
 alias del="mv --force -t ~/.Trash"
 alias code="cd ~/Code/"
 alias ccode="cd ~/Code/C/00_Projects/"
-alias cl="cd $1 && ll"
+alias cl='cd $1; ll'
+
 
 # Editors
 alias n="nvim"
