@@ -44,22 +44,25 @@ set -o noclobber
 
 ##Aliases##
 
+lwrap () {
+    printf "\n\n"; $1; printf "\n\n"
+}
+
 # Navigatin
-alias l='echo -e "\n\n"; ls; echo -e "\n\n"'
-alias ll="ls -A"
-alias lsa='echo -e "\n"; ls -lA; echo -e "\n"'
-alias mount="mount |column -t"
+alias lsc='ls --color=always'
+alias l='lwrap "ls --color=always"'
+alias lsa='lwrap "ls --color=always -A"'
+alias ll='lwrap "ls --color=always -lA"'
+alias mount="mount | column -t"
 alias del="mv --force -t ~/.Trash"
 alias code="cd ~/Code/"
 alias ccode="cd ~/Code/C/00_Projects/"
-alias cl='cd $1; ll'
-
 
 # Editors
 alias n="nvim"
+alias N="sudo nvim"
 alias v="vim"
 alias V="sudo vim"
-alias rv="sudo vim"
 alias e="emacs -nw"
 
 # Packages

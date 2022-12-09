@@ -5,7 +5,7 @@
 #
 
 # Keybinds
-xmodmap .Xmodmap 
+xmodmap ~/.Xmodmap 
 
 # Increase key repeat
 xset r rate 270 35
