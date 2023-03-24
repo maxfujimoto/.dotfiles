@@ -33,7 +33,7 @@ dwm.topbar: 1
 
 !	!!st!!
 st.alpha: 0.87
-!st.font: "Liberation Mono:pixelsize=12:antialias=true:autohint=true"
+st.font: DejaVuSansMono-Oblique:pixelsize=15:antialias=true:autohint=true
 !st.color0: #0000ff
 !st.color1: #ffff00
 !st.color2: #00ffff
