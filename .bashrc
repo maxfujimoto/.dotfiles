@@ -77,6 +77,8 @@ alias arcsync="rsync -avh --progress"
 alias fdiff="diff --brief --recursive"
 alias sd="sudo powerprompt"
 alias hist="cat ~/.bash_history | fzf"
+alias inst="pacman -Q | fzf"
+alias S='sudo "$BASH" -c "$(history -p !!)"'
 
 # Confiugre and Update
 alias xres="vim ~/.Xresources; xrdb ~/.Xresources && echo 'xrdb ~/.Xresources' || echo 'ERROR: \'xrdb\' was not refreshed'"
