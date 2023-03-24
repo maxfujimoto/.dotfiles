@@ -45,7 +45,7 @@ set -o noclobber
 ##Aliases##
 
 lwrap () {
-    printf "\n\n"; $1; printf "\n\n"
+    printf "\n\n"; $@; printf "\n\n"
 }
 
 # Navigatin
