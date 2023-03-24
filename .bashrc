@@ -79,5 +79,5 @@ alias sd="sudo powerprompt"
 alias hist="cat ~/.bash_history | fzf"
 
 # Confiugre and Update
-alias xres="vim ~/.Xresources; xrdb ~/.Xresources & echo 'xrdb ~/.Xresources'"
-alias bashrc="vim ~/.bashrc; source ~/.bashrc & echo 'source ~/.bashrc'"
+alias xres="vim ~/.Xresources; xrdb ~/.Xresources && echo 'xrdb ~/.Xresources' || echo 'ERROR: \'xrdb\' was not refreshed'"
+alias bashrc="vim ~/.bashrc; source ~/.bashrc && echo 'sourced ~/.bashrc' || echo 'ERROR: '.bashrc' was not reloaded'"
