@@ -10,20 +10,22 @@ xmodmap ~/.Xmodmap
 # Increase key repeat
 xset r rate 270 35
 
-# Compositor for alpha 
-picom &
-
 # Status Bar
 dwmblocks &
 
 # Set backlight to 50%
-backlight 50
+# need if controllable monitor check
+# backlight 50
 
 # Hide mouse after 7 s
 unclutter -idle 7 &
 
+# Compositor
+# pidof picom >/dev/null || picom &
+picom &
+
 # Set Background
-feh --bg-scale ~/Pictures/Backgrounds/monks_wide.jpg &
+feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg 
 
 # Xresources
 xrdb $HOME/.Xresources
@@ -31,5 +33,15 @@ xrdb $HOME/.Xresources
 # Java Window Sizing
 export AWT_TOOLKIT=MToolkit
 
+# ---------- ONLY IN .XINITRC START ----------
+# ------- DO NOT REMOVE THESE COMMENTS -------
 
-exec dwm
+# Emacs Daemon
+emacs --fg-daemon &
+
+while true; do
+    dbus-launch --exit-with-session dwm 2> ~/Documents/Logs/dwm.log
+done
+
+# ------- DO NOT REMOVE THESE COMMENTS -------
+# ----------- ONLY IN .XINITRC END -----------
