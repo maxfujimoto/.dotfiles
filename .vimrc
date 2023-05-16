@@ -1,5 +1,7 @@
 " GUI
 
+filetype plugin indent on
+
 " Syntax Highliting
 syntax on
 
