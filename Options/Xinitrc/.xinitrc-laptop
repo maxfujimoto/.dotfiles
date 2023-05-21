@@ -39,9 +39,7 @@ export AWT_TOOLKIT=MToolkit
 pidof emacs >/dev/null || emacs --fg-daemon &
 
 while true; do
-
     dbus-launch --exit-with-session dwm 2> ~/Documents/Logs/dwm.log
-
 done
 
 # ------- DO NOT REMOVE THESE COMMENTS -------

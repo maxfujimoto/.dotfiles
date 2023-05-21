@@ -6,8 +6,8 @@
 
 
 # nVidia
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
+# xrandr --auto
 
 # Keybinds
 xmodmap .Xmodmap 
@@ -16,7 +16,7 @@ xmodmap .Xmodmap
 xset r rate 270 35
 
 # Compositor
-picom &
+pidof picom >/dev/null || picom &
 
 # Status Bar
 dwmblocks &
@@ -27,14 +27,21 @@ unclutter -idle 7 &
 # Set Background
 feh --bg-scale ~/Pictures/Backgrounds/skellig_michael.jpg &
 
-# BG Color BROKEN
-# xsetroot -bg "#000000" &
-
 # Xresources
 xrdb $HOME/.Xresources
 
 # Java Window Sizing
 export AWT_TOOLKIT=MToolkit
 
+# ---------- ONLY IN .XINITRC START ----------
+# ------- DO NOT REMOVE THESE COMMENTS -------
 
-exec dwm
+# Emacs Daemon
+pidof emacs >/dev/null || emacs --fg-daemon &
+
+while true; do
+    dbus-launch --exit-with-session dwm 2> ~/Documents/Logs/dwm.log
+done
+
+# ------- DO NOT REMOVE THESE COMMENTS -------
+# ----------- ONLY IN .XINITRC END -----------
