@@ -17,12 +17,11 @@ dwmblocks &
 # need if controllable monitor check
 # backlight 50
 
+# Compositor
+pidof picom >/dev/null || picom &
+
 # Hide mouse after 7 s
 unclutter -idle 7 &
-
-# Compositor
-# pidof picom >/dev/null || picom &
-picom &
 
 # Set Background
 feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg 
@@ -37,10 +36,12 @@ export AWT_TOOLKIT=MToolkit
 # ------- DO NOT REMOVE THESE COMMENTS -------
 
 # Emacs Daemon
-emacs --fg-daemon &
+pidof emacs >/dev/null || emacs --fg-daemon &
 
 while true; do
+
     dbus-launch --exit-with-session dwm 2> ~/Documents/Logs/dwm.log
+
 done
 
 # ------- DO NOT REMOVE THESE COMMENTS -------
