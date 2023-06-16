@@ -4,14 +4,18 @@
 # ~/.xinitrc
 #
 
+
+# Detect laptop lid
+mondetect
+
 # Keybinds
-xmodmap ~/.Xmodmap 
+xmodmap $HOME/.Xmodmap 
 
 # Increase key repeat
 xset r rate 270 35
 
 # Status Bar
-dwmblocks &
+pidof dwmblocks >/dev/null || dwmblocks &
 
 # Set backlight to 50%
 # need if controllable monitor check
