@@ -28,7 +28,8 @@ pidof picom >/dev/null || picom &
 unclutter -idle 7 &
 
 # Set Background
-feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg 
+feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg &&
+    mv $HOME/.fehbg $XDG_CONFIG_HOME/fehbg
 
 # Xresources
 xrdb $HOME/.Xresources
