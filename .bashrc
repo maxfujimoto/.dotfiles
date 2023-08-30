@@ -37,7 +37,8 @@ fi
 
 ####### Prompt #######
 ## Get unique color based on hostname
-hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
+hostnamecolor=$(cat /etc/hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
+# hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
 
 ## No color ##
 # PS1='[\u@\h \W]\$ '
@@ -48,7 +49,18 @@ hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print
 # PS1='\[\033[01;36m\][\u@\h\[\033[01;37m\] \w\[\033[01;36m\]]\$ \[\033[00m\]'
 
 ## Cyan w/ '@' colored by hostname ##
-PS1='\[\033[01;36m\][\u\[\e[${hostnamecolor}m\]\]@\[\033[01;36m\]\h\[\033[01;37m\] \w\[\033[01;36m\]]\$ \[\033[00m\]'
+export PROMPT_DIRTRIM=2
+case "$TERM" in
+"dumb")
+    PS1="> "
+    ;;
+st*|[ex]term*|linux)
+    PS1='\[\e[96;1m\][\u\[\e[${hostnamecolor}m\]@\[\e[38;5;51m\]\H \[\e[97m\]\w\[\e[38;5;51m\]]\$ \[\e[0m\]'
+    ;;
+*)
+    PS1="> "
+    ;;
+esac
 
 ## Full path ##
 # PS1='\[\033[01;36m\][\u@\h\[\033[01;37m\] \w\[\033[01;36m\]]\$ \[\033[00m\]'
