@@ -28,14 +28,11 @@ pidof picom >/dev/null || picom &
 unclutter -idle 7 &
 
 # Set Background
-feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg &&
-    mv $HOME/.fehbg $XDG_CONFIG_HOME/fehbg
+#feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg &&
+#    mv $HOME/.fehbg $XDG_CONFIG_HOME/fehbg &
 
 # Xresources
 xrdb $HOME/.Xresources
-
-# Java Window Sizing
-export AWT_TOOLKIT=MToolkit
 
 # ---------- ONLY IN .XINITRC START ----------
 # ------- DO NOT REMOVE THESE COMMENTS -------
@@ -44,7 +41,10 @@ export AWT_TOOLKIT=MToolkit
 pidof emacs >/dev/null || emacs --fg-daemon &
 
 while true; do
-    dbus-launch --exit-with-session dwm 2> ~/Documents/Logs/dwm.log
+    [ ! -e "$HOME/.local/share/dwm/dwm.log" ] &&
+	mkdir -p $HOME/.local/share/dwm/ &&
+	touch $HOME/.local/share/dwm/dwm.log
+    dbus-launch --exit-with-session dwm 2> $HOME/.local/share/dwm/dwm.log
 done
 
 # ------- DO NOT REMOVE THESE COMMENTS -------

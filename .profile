@@ -2,7 +2,6 @@
 # ~/.profile
 #
 
-
 # If running bash, source .bashrc
 if [ -n "$BASH_VERSION" ]; then
     if [ -f "$HOME/.bashrc" ]; then
@@ -21,17 +20,17 @@ export TERMINAL="st"
 export TERMINAL_PROG="st"
 export BROWSER="firefox"
 
-# Setting XDG Paths
+# XDG Paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME=$HOME/.local/state
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
 # export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch-config"
-export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
+export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME/bash-completion/bash_completion"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
-export AWT_TOOLKIT=MToolkit	# Java Window Sizing
 # colored GCC warnings and errors
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
@@ -53,7 +52,6 @@ export HISTFILE="$XDG_DATA_HOME/history"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
 # export gpg2 --homedir '$XDG_DATA_HOME'/gnupg
-# export nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings
 
 # Other Settings
 # export DICS="/usr/share/stardict/dic/"
@@ -70,8 +68,14 @@ export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
 export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2" # Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1" # Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D" # May have to install wmname
+export AWT_TOOLKIT="MToolkit wmname LG3D" # May have to install wmname arduino ide fix
 export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
+
+# Nvidia
+# export nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings
+# export __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia 'firefox'
+# export __NV_PRIME_RENDER_OFFLOAD=0 __GLX_VENDOR_LIBRARY_NAME=nvidia 'torbrowser-launcher'
+# export __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia 'emacs'
 
 # If in tty, startx
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then

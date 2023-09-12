@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-# If not running interactively, don't do anything
+# If not running interactively, do nothing
 [[ $- != *i* ]] && return
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -43,30 +43,26 @@ hostnamecolor=$(cat /etc/hostname | od | tr ' ' '\n' | awk '{total = total + $1}
 ## No color ##
 # PS1='[\u@\h \W]\$ '
 
+## Two Line ##
 # PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\[\e[${hostnamecolor}m\]\]\h \[\e[32m\]\w\[\e[0m\]\n$ '
 
 ## Cyan ##
 # PS1='\[\033[01;36m\][\u@\h\[\033[01;37m\] \w\[\033[01;36m\]]\$ \[\033[00m\]'
 
+PS1='\[\e[96;1m\][\u\[\e[${hostnamecolor}m\]@\[\e[38;5;51m\]\H \[\e[97m\]\w\[\e[38;5;51m\]]\$ \[\e[0m\]'
 ## Cyan w/ '@' colored by hostname ##
 export PROMPT_DIRTRIM=2
 case "$TERM" in
 "dumb")
     PS1="> "
     ;;
-st*|[ex]term*|linux)
-    PS1='\[\e[96;1m\][\u\[\e[${hostnamecolor}m\]@\[\e[38;5;51m\]\H \[\e[97m\]\w\[\e[38;5;51m\]]\$ \[\e[0m\]'
-    ;;
-*)
-    PS1="> "
-    ;;
+# st*|[ex]term*|tmux*|linux)
+#     PS1='\[\e[96;1m\][\u\[\e[${hostnamecolor}m\]@\[\e[38;5;51m\]\H \[\e[97m\]\w\[\e[38;5;51m\]]\$ \[\e[0m\]'
+#     ;;
+# *)
+#     PS1="> "
+#     ;;
 esac
-
-## Full path ##
-# PS1='\[\033[01;36m\][\u@\h\[\033[01;37m\] \w\[\033[01;36m\]]\$ \[\033[00m\]'
-
-## legacy? ##
-# export PROMPT_DIRTRIM=2
 
 ####### Behavior #######
 ## Completion ##
@@ -85,11 +81,9 @@ fi
     . /usr/share/bash-completion/bash_completion
 
 complete -c pr
-
+# complete -cf sudo 
 
 ## Behavior ##
 # Changes > overwrite to >| #
 # set -o noclobber
-# revert
-# set +o noclobber
 

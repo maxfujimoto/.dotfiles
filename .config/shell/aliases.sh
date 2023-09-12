@@ -48,6 +48,7 @@ alias \
     fgrep='fgrep --color=auto' \
     egrep='egrep --color=auto' \
     diff='diff --color=auto' \
+    watch='watch -c' \
     ip="ip -color=auto"
 
 ## Defaults ##
@@ -59,9 +60,22 @@ alias \
     rsync='rsync -vpl' \
     mkd='mkdir -pv' \
     ffmpeg='ffmpeg -hide_banner' \
-    # rsync='rsync -vrplu' 
+    # rsync='rsync -vrplu'
+
+# git clone adds to repos folder
+git() {
+    if [[ $1 == "clone" ]]; then
+        command git $@ &&
+	    command echo "$2 @ $(pwd)" >> $XDG_CONFIG_HOME'/git/repos'
+    else
+        command git "$@"
+    fi
+}
 
 ## Tools ##
+# Power #
+alias slp='sudo bash -c "echo mem > /sys/power/state"'
+
 # Sync #
 # Only sync files if newer #
 alias upsync='rsync -auvh --progress'
@@ -69,30 +83,44 @@ alias upsync='rsync -auvh --progress'
 alias rrsync='rsync -rvh --progress'
 # Sync preserving meta-data #
 alias arcsync='rsync -ravh --progress'
+# Compress, and give drwxr-xr-x / rw-r--r-- permissions
+alias csync='rsync -avzrh --perms --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r --progress'
 # Compare two directories #
 alias rdiff='rsync -avhn --progress'
+
+# Compression #
+alias utar='tar -xvf'
 
 # Alert #
 # Add an "alert" alias for long running commands.  Use like so: $ sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias a='alert'
 
 # Misc #
 alias \
     fdiff='diff --brief --recursive' \
     hist='cat ~/.bash_history | fzf' \
     S='sudo "$BASH" -c "$(history -p !!)"' \
-    pr="prime-run $@" \
+    pr="prime-run" \
     ds='du -h --max-depth=1' \
-    torb='prime-run torbrowser-launcher'
+    prff='prime-run firefox' \
+    prtor='prime-run torbrowser-launcher' \
+    sc='scrot -cd 5 ~/Pictures/Screenshots%Y%b%d-%H:%M:%S.png'
 
 # Wifi
 wifiadd () {
 nmcli device wifi connect $1 password $2
 }
 
+## Secrets ##
+if [ -f ~/Documents/Keys/secrets.sh ]; then
+    . ~/Documents/Keys/secrets.sh
+fi
 ## Remote ##
 alias cs='ssh max@Clean_System'
+alias ns='ssh max@Nas_System'
 alias wcs="wol $cleansysmac"
+alias wns="wol $nassysmac"
 wccs () {
   wol $cleansysmac
   echo -n 'Waiting for server to respond ...'
