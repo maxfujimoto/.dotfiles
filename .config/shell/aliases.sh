@@ -4,21 +4,14 @@
 # Aliases
 #
 
-lwrap () {
-    printf '\n\n'; $@; printf '\n\n'
-}
-
-## Navigatin ##
+#------------------------------------   TP   ------------------------------------#
 alias \
-    lsc='ls --color=always' \
-    l='lwrap "ls -h --color=always"' \
-    lsa='lwrap "ls -h --color=always -A"' \
-    ll='lwrap "ls -h --color=always -lA"' \
-    lt='exa --tree --level=2' \
-    mount='mount | column -t' \
-    del='mv --force -t ~/.Trash $@'
+    dl="cd $HOME/Downloads/" \
+    C="cd $HOME/Code/" \
+    c="cd $XDG_CONFIG_HOME" \
+    d="cd $HOME/Documents/" \
 
-## Editors ##
+#---------------------------------   Editors   ---------------------------------#
 alias \
     n='nvim' \
     N='sudo nvim' \
@@ -27,52 +20,164 @@ alias \
     e='emacs -nw' \
     ec='emacsclient' \
     ed='emacs --daemon' \
+    red='killall emacs && emacs --daemon' \
     ped='prime-run emacs --daemon'
-# Use neovim for vim if present.
+
+# Use Vim if available
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-## Packages ##
+#----------------------------------   Pacman   ----------------------------------#
 alias \
+    y='yay' \
+    yass='yay -Ss'\
     p='pacman' \
     P='sudo pacman' \
-    pkgs='pacman -Q | fzf'
+    ps='pacman -Q | fzf' \
+    psz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | fzf" \
+    plsz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less" \
+    pds="pactree -c $1" \
+    pds="pactree -r $1" \
+    pfs="pacman -Ql $1" \
+    pfo="pacman -Qo $1" \
+    pqs="pacman -Q | grep $1" \
+    pup='yay -Qu' \
+    Pc='echo "sudo paccache -rk1..." && sudo paccache -rk1 && echo "Cache Cleaned, Leaving Latest Version" || echo "Something went wrong"' \
+    Pcc='echo "sudo pacman -Scc..." && sudo pacman -Scc && echo "Cache Cleared" || echo "Something went wrong"' \
+    ph='echo -e \
+"p	pacman
+P	sudo pacman
+ps	Search installed packages
+psz	Sort packages by size - fzf
+plsz	Sort packages by size - less
+pds	Display package dependencies
+prs	Display packages that require a package
+pfs	List files installed by a package
+pfo	Display the package that owns a file
+pbs	Display the package a program belongs to
+pqs	Search for a package by name
+pup	List upgradable packages
+Pc	Clean cache, keeping the latest version
+Pcc	Clear cache\n"'
 
-## XDG ##
+pbs () {
+    pacman -Ql | grep "$1$" | cut -f1 -d ' ' | uniq
+}    
+
+prs () {
+    [ -n "${1}" ] && 
+	pacman -Qi $1 | grep 'Required By' ||
+	    echo "Please provide a package"
+}
+
+#-----------------------------------   XDG    -----------------------------------#
+# move?
 alias \
     units='units --history "$XDG_CACHE_HOME"/units_history' \
-    nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+    nvidia-settings="nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings"
 
 ## Color ##
 alias \
+    ls='ls --color=always' \
     grep='grep --color=auto' \
     fgrep='fgrep --color=auto' \
     egrep='egrep --color=auto' \
     diff='diff --color=auto' \
     watch='watch -c' \
-    ip="ip -color=auto"
+    ip='ip -color=auto' \
+    pactree='pactree -c'
+    # less='less -c' \
 
-## Defaults ##
+#---------------------------------   Defaults   ---------------------------------#
+
 alias \
     cp='cp -iv' \
     mv='mv -iv' \
-    rm='rm -vi' \
     bc='bc -ql' \
+    df='df -h' \
+    mount='mount | column -t' \
+    which='type -all' \
     rsync='rsync -vpl' \
-    mkd='mkdir -pv' \
+    trash-put='trash-put -v' \
+    mkdir='mkdir -pv' \
     ffmpeg='ffmpeg -hide_banner' \
+    spotifyd='spotifyd --no-daemon'
     # rsync='rsync -vrplu'
+    # rm='rm -iv' \
 
-# git clone adds to repos folder
-git() {
-    if [[ $1 == "clone" ]]; then
-        command git $@ &&
-	    command echo "$2 @ $(pwd)" >> $XDG_CONFIG_HOME'/git/repos'
+# man () {
+# { tldr "$1" && man "$1"; } | less
+# }
+
+# man () {
+# { tldr "$1" | less -R && man "$1" | less -R; }
+# }
+
+#---------------------------------   Warnings   ---------------------------------#
+
+# Warn about unsafe functions
+
+funcwarn () {
+    echo "This is an alias to block the accidental usage of $@. If necessary use \\$@ or the full path"
+    }
+
+sudowarn () {
+    case $@ in 
+	poweroff*) funcwarn $@;;
+	reboot*) funcwarn $@;;
+	shutdown*) funcwarn $@;;
+	rm*) funcwarn $@;;
+	*) sudo $@;;
+esac
+}
+
+alias \
+    rm="funcwarn rm" \
+    sudo=sudowarn
+
+#--------------------------------   Shorthand   --------------------------------#
+
+alias \
+    sp='spotify_player'
+
+#----------------------------------   Tools   ----------------------------------#
+
+alias fixfeh="$HOME/.config/feh/.fehbg"
+
+dswn () { "$@" & disown; }
+
+#when run with dwmblocks crashes xserver?
+# alias rst='pkill "$1" && "$1"'
+
+mkdircd() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: mkdircd <directory_name>"
     else
-        command git "$@"
+        mkdir "$1" && cd "$1"
     fi
 }
 
-## Tools ##
+# Profiling
+timel () {
+    time sh -c $@
+}
+
+
+# Pad stdout with 2 lines
+lwrap () { printf '\n\n'; $@; printf '\n\n'; }
+
+# Navigatin #
+alias \
+    l='lwrap "ls -h --color=always"' \
+    lsa='lwrap "ls -h --color=always -A"' \
+    ll='lwrap "ls -h --color=always -lA"' \
+    lt='exa --tree --level=2' \
+    del="trash-put $@"
+
+# Info #
+alias \
+    path='echo -e ${PATH//:/\\n}' \
+
+
 # Power #
 alias slp='sudo bash -c "echo mem > /sys/power/state"'
 
@@ -99,17 +204,22 @@ alias a='alert'
 # Misc #
 alias \
     fdiff='diff --brief --recursive' \
-    hist='cat ~/.bash_history | fzf' \
+    hist="cat $HISTFILE | fzf" \
     S='sudo "$BASH" -c "$(history -p !!)"' \
     pr="prime-run" \
-    ds='du -h --max-depth=1' \
+    dS='du -h --max-depth=1 | sort -h' \
     prff='prime-run firefox' \
     prtor='prime-run torbrowser-launcher' \
-    sc='scrot -cd 5 ~/Pictures/Screenshots%Y%b%d-%H:%M:%S.png'
+    sc='scrot -cud 5 ~/Pictures/Screenshots/Screenshot%Y%b%d-%H:%M:%S.png'
+
+# File mgmt
+ds () {
+    du -sh ${@:-*} | sort -h
+}
 
 # Wifi
 wifiadd () {
-nmcli device wifi connect $1 password $2
+    nmcli device wifi connect $1 password $2
 }
 
 ## Secrets ##

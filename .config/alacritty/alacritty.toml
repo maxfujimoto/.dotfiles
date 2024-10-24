@@ -1,0 +1,30 @@
+[colors.bright]
+black = "#7F7F7F"
+blue = "#5C5CFF"
+cyan = "#00FFFF"
+green = "#008000"
+magenta = "#FF00FF"
+red = "#FF0000"
+white = "#000000"
+yellow = "#FFFF00"
+
+[colors.normal]
+black = "#000000"
+blue = "#0000EE"
+cyan = "#00CDCD"
+green = "#00CD00"
+magenta = "#FF00FF"
+red = "#CD0000"
+white = "#e5e5e5"
+yellow = "#FFFF00"
+
+[colors.primary]
+background = "#000000"
+
+[window]
+dynamic_title = true
+opacity = 0.87
+
+[window.padding]
+x = 7
+y = 7

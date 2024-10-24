@@ -4,48 +4,55 @@
 # ~/.xinitrc
 #
 
+# Wallpaper
+# wp="$HOME/Pictures/Wallpaper/Phone/phone-library_tower.jpg"
+wp="$HOME/Pictures/Wallpaper/Phone/xie_yixuan-shenshi_1.jpg"
+wp1="$HOME/Pictures/Wallpaper/Space/jwst.webp"
 
-# Detect laptop lid
+# Run Once
+# mondetect			# Detect monitors and laptop lid
+xrdb $HOME/.Xresources &	# load Xresources
+xmodmap $HOME/.Xmodmap &	# Key binds
+xset r rate 270 35 &		# Increase key repeat
+wifi off &			# replace with internetdetect
 mondetect
+backlight 33 &
+# replace with monswitch or detect
+# xrandr --output eDP-1 --off --output VGA-1 --off --output HDMI-1 --off --output HDMI-2 --off --output DP-2-2 --rotate left --auto --right-of DP-2-2 --output DP-2-3 --off --output DP-2-1 --primary --auto 
+feh ---bg-fill "$wp1" --bg-fill "$wp" # set bg
+mv ~/.fehbg $XDG_CONFIG_HOME/feh/.fehbg # TODO: BG string to config
 
-# Keybinds
-xmodmap $HOME/.Xmodmap 
+wait				# wait for jobs to finish
 
-# Increase key repeat
-xset r rate 270 35
+# AutoStart --------------------------------------------------------------------------
+# Separated _AND APPENDED_ by '|'
+startlist="xcompmgr|dunst|pipewire|dwmblocks|emacs --daemon|unclutter -idle 7|"
 
-# Status Bar
-pidof dwmblocks >/dev/null || dwmblocks &
+IFSuser="$IFS"			# Save users IFS
+IFS='|'				# Set internal file separator to '|'
+auto_run () {
+    local prog="$(echo "$1" | awk '{print $1;}')" # Separate commands and Args
+    pidof -sx "$prog" || $program & # If no PID found, start
+}
 
-# Set backlight to 50%
-# need if controllable monitor check
-# backlight 50
+for program in $startlist; do
+    IFS=' '
+    auto_run $program &
+    IFS='|'
+done >/dev/null 2>&1
+IFS="$IFSuser"
 
-# Compositor
-pidof picom >/dev/null || picom &
+# ------------------------------ ONLY IN .XINITRC START ------------------------------
+# --------------------------- DO NOT REMOVE THESE COMMENTS ---------------------------
 
-# Hide mouse after 7 s
-unclutter -idle 7 &
-
-# Set Background
-#feh --bg-fill ~/Pictures/Wallpaper/Ancient/lanisphaeri_coeleste.jpg &&
-#    mv $HOME/.fehbg $XDG_CONFIG_HOME/fehbg &
-
-# Xresources
-xrdb $HOME/.Xresources
-
-# ---------- ONLY IN .XINITRC START ----------
-# ------- DO NOT REMOVE THESE COMMENTS -------
-
-# Emacs Daemon
-pidof emacs >/dev/null || emacs --fg-daemon &
-
+# Make and backup logs, run dwm with dbus
 while true; do
+    mv $HOME/.local/share/dwm/dwm.log $HOME/.local/share/dwm/dwm.old.log
     [ ! -e "$HOME/.local/share/dwm/dwm.log" ] &&
 	mkdir -p $HOME/.local/share/dwm/ &&
 	touch $HOME/.local/share/dwm/dwm.log
     dbus-launch --exit-with-session dwm 2> $HOME/.local/share/dwm/dwm.log
 done
 
-# ------- DO NOT REMOVE THESE COMMENTS -------
-# ----------- ONLY IN .XINITRC END -----------
+# --------------------------- DO NOT REMOVE THESE COMMENTS ---------------------------
+# ------------------------------- ONLY IN .XINITRC END -------------------------------

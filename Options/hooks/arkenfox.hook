@@ -1,0 +1,10 @@
+[Trigger]
+Type=Package
+Operation=Install
+Operation=Upgrade
+Target=firefox
+
+[Action]
+Description=Updating Firefox...
+When=PostTransaction
+Exec=/bin/sh -c 'cd ~/.mozilla/firefox/ffsr9rey.2023/; ./updater; ./prefsCleaner'

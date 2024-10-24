@@ -3,24 +3,24 @@
 !!
 
 
-!	!!X!!
-!Xft.antialias: true
-!Xft.rgba: rgb
-Xft.dpi: 107					!!def: 96
+	!!X!!
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.dpi: 158				!!def: 96
 
 
-!	!!dwm!!
+	!!dwm!!
 dwm.font: monospacesize=10
 dwm.dmenufont: monospacesize=10
 dwm.normbgcolor: #222222
 dwm.normbordercolor: #444444
 dwm.normfgcolor: #bbbbbb
-dwm.selbgcolor: #eeeeee 
-dwm.selbordercolor: #fd5300
+dwm.selbgcolor: #ff0000 
+dwm.selbordercolor: #00ff00
 dwm.selfgcolor: #eeeeee
 !dwm.normbarcolor:
 !!greens 002703 004317, 003010,
-dwm.selbarcolor: #032701
+dwm.selbarcolor: #ff0000
 dwm.seltagcolor: #777777
 !dwm.borderpxp: 
 !dwm.snap: 

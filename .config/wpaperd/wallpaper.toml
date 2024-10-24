@@ -1,0 +1,13 @@
+[default]
+path = "/home/max/Pictures/Wallpaper"
+duration = "30m"
+# sorting = "random"
+# sorting = "ascending"
+# sorting = "descending"
+# apply-shadow = true
+
+[DP-3]
+path = "/home/max/Pictures/Wallpaper/Phone/phone-shenshi_1.jpg"
+
+[DP-4]
+path = "/home/max/Pictures/Wallpaper/Space/jwst.webp"

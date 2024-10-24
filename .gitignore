@@ -1,3 +1,16 @@
 # Tempfiles
 *~
+\#*\#
 *.bak
+
+# Log Files
+*.log
+
+# Firefox Files
+/.mozilla/firefox/ffsd9rey.2023
+/.mozilla/firefox/Wayland/
+
+# Private Files
+
+/.config/gh/hosts.yml
+/.config/git/

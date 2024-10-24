@@ -1,0 +1,11 @@
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Target = *
+
+[Action]
+Description = Updating xrdb...
+When = PostTransaction
+Exec = xrdb $HOME/.Xresources
