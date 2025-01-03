@@ -17,10 +17,10 @@ alias \
     N='sudo nvim' \
     v='vim' \
     V='sudo vim' \
-    e='emacs -nw' \
-    ec='emacsclient' \
+    e='emacsclient -cl -nw || emacs -nw' \
+    ec='emacsclient -c' \
     ed='emacs --daemon' \
-    red='killall emacs && emacs --daemon' \
+    red='pkill -f "emacs --daemon" && emacs --daemon' \
     ped='prime-run emacs --daemon'
 
 # Use Vim if available
@@ -30,16 +30,16 @@ alias \
 alias \
     y='yay' \
     yass='yay -Ss'\
-    p='pacman' \
-    P='sudo pacman' \
+    p='pacman --color=always' \
+    P='sudo pacman --color=always' \
     ps='pacman -Q | fzf' \
     psz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | fzf" \
     plsz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less" \
-    pds="pactree -c $1" \
-    pds="pactree -r $1" \
-    pfs="pacman -Ql $1" \
-    pfo="pacman -Qo $1" \
-    pqs="pacman -Q | grep $1" \
+    pds="pactree -c" \
+    pds="pactree -r" \
+    pfs="pacman -Ql" \
+    pfo="pacman -Qo" \
+    pqs="pacman -Q | grep" \
     pup='yay -Qu' \
     Pc='echo "sudo paccache -rk1..." && sudo paccache -rk1 && echo "Cache Cleaned, Leaving Latest Version" || echo "Something went wrong"' \
     Pcc='echo "sudo pacman -Scc..." && sudo pacman -Scc && echo "Cache Cleared" || echo "Something went wrong"' \
@@ -65,7 +65,7 @@ pbs () {
 
 prs () {
     [ -n "${1}" ] && 
-	pacman -Qi $1 | grep 'Required By' ||
+	pacman -Qi "$1" | grep 'Required By' ||
 	    echo "Please provide a package"
 }
 
@@ -117,16 +117,16 @@ alias \
 # Warn about unsafe functions
 
 funcwarn () {
-    echo "This is an alias to block the accidental usage of $@. If necessary use \\$@ or the full path"
+    echo "This is an alias to block the accidental usage of $1. If necessary use \\$1 or the full path"
     }
 
 sudowarn () {
     case $@ in 
-	poweroff*) funcwarn $@;;
-	reboot*) funcwarn $@;;
-	shutdown*) funcwarn $@;;
-	rm*) funcwarn $@;;
-	*) sudo $@;;
+	poweroff*) funcwarn "$@";;
+	reboot*) funcwarn "$@";;
+	shutdown*) funcwarn "$@";;
+	rm*) funcwarn "$@";;
+	*) sudo "$@";;
 esac
 }
 
@@ -158,9 +158,12 @@ mkdircd() {
 
 # Profiling
 timel () {
-    time sh -c $@
+    time sh -c "$@"
 }
 
+rsrt () {
+    pkill $@ && $@
+}
 
 # Pad stdout with 2 lines
 lwrap () { printf '\n\n'; $@; printf '\n\n'; }
@@ -176,7 +179,6 @@ alias \
 # Info #
 alias \
     path='echo -e ${PATH//:/\\n}' \
-
 
 # Power #
 alias slp='sudo bash -c "echo mem > /sys/power/state"'

@@ -1,0 +1,2 @@
+highlight all "---.*---" yellow
+highlight feedlist ".*(0/0))" black

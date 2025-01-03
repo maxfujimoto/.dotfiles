@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+# Minecraft Launcher
+#
+
+# default
+# sudo archlinux-java set java-21-openjdk
+
+# optimized
+# sudo archlinux-java set java-21-temurin
+
+pidof dropbox >/dev/null || dropbox &
+# export PATH="/usr/lib/jvm/java-21-temurin/bin/:$PATH"
+# pidof minecraft-launcher >/dev/null || gamemoderun prime-run minecraft-launcher &
+pidof minecraft-launcher >/dev/null || gamemoderun minecraft-launcher
+

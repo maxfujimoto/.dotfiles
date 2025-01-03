@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Reaper Alias
+
+# # Default latency
+# LATENCY="256"
+
+# # Check the number of arguments
+# if [ "$#" -eq 0 ]; then
+#     : # No action needed; default latency will be used
+# elif [ "$1" -eq 128 ] || [ "$1" -eq 256 ] || [ "$1" -eq 512 ]; then
+#     LATENCY="$1"
+# else
+#     echo "Invalid latency value. Use 128, 256, or 512."
+#     exit 1
+# fi
+
+# # Set the PIPEWIRE_LATENCY and run Reaper
+# PIPEWIRE_LATENCY="${LATENCY}/48000" reaper
+
+# version 2
+# Reaper Alias
+
+# Default latency
+LATENCY="256"
+
+# Check the number of arguments
+case "$#" in
+    0)
+        : # No action needed; default latency will be used
+        ;;
+    1)
+        case "$1" in
+            128|256|512)
+                LATENCY="$1"
+                ;;
+            *)
+                echo "Invalid latency value. Use 128, 256, or 512."
+                exit 1
+                ;;
+        esac
+        ;;
+    *)
+        echo "Too many arguments. Use 128, 256, or 512."
+        exit 1
+        ;;
+esac
+
+# Set the PIPEWIRE_LATENCY and run Reaper
+echo PIPEWIRE_LATENCY="${LATENCY}/48000" reaper
+PIPEWIRE_LATENCY="${LATENCY}/48000" reaper

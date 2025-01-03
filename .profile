@@ -9,6 +9,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="${PATH}:/$HOME/.local/bin"
 export PATH="${PATH}:/$HOME/.local/bin/Aliases"
 export PATH="${PATH}:/$HOME/.local/bin/StatusBar"
+export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"
 # export DICS="/usr/share/stardict/dic/"
 
 # Default Programs

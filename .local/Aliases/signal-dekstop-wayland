@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#
+# Signal Desktop Walyand
+#
+
+# Runtime Options
+
+signal-desktop --use-tray-icon --enable-features=UseOzonePlatform --ozone-platform=wayland

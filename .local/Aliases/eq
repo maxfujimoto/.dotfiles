@@ -1,0 +1,8 @@
+#!/bin/sh
+
+#
+# Emacs Quick
+#
+
+emacs -Q --load ~/.config/emacs/mf-clean.el
+

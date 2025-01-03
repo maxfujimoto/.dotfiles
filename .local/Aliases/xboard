@@ -1,0 +1,27 @@
+#!/bin/sh
+
+#
+# Xboard Alias
+#s
+
+# Set the location for your XBoard settings
+XBOARD_SETTINGS_DIR="$XDG_CONFIG_HOME/xboard"
+XBOARD_SETTINGS_FILE=".xboardrc"
+
+# Start XBoard with the specified configuration file in the background
+xboard -f "$XBOARD_SETTINGS_DIR/$XBOARD_SETTINGS_FILE" &
+
+# Capture the process ID (PID) of the running XBoard
+XBOARD_PID=$!
+
+SLEEP_INTERVAL=5
+
+# Loop to periodically check the status of the XBoard process
+while kill -0 "$XBOARD_PID" 2>/dev/null; do
+    sleep "$SLEEP_INTERVAL"
+done
+
+# Move the settings file to the desired location
+mv "$HOME/$XBOARD_SETTINGS_FILE" "$XBOARD_SETTINGS_DIR/"
+
+echo "XBoard settings file moved from \"x~/\" to $XBOARD_SETTINGS_DIR/"
