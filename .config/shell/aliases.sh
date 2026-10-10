@@ -30,20 +30,25 @@ alias \
 alias \
     y='yay' \
     yass='yay -Ss'\
-    p='pacman --color=always' \
-    P='sudo pacman --color=always' \
-    pls='pacman -Q | fzf' \
-    psz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | fzf" \
-    plsz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less" \
-    pds="pactree -c" \
-    pds="pactree -r" \
-    pfs="pacman -Ql" \
-    pfo="pacman -Qo" \
-    pqs="pacman -Q | grep" \
-    pup='yay -Qu' \
-    Pc='echo "sudo paccache -rk1..." && sudo paccache -rk1 && echo "Cache Cleaned, Leaving Latest Version" || echo "Something went wrong"' \
-    Pcc='echo "sudo pacman -Scc..." && sudo pacman -Scc && echo "Cache Cleared" || echo "Something went wrong"' \
-    ph='echo -e \
+    P='sudo pacman --color=always' 
+
+p_location="${HOME}/.local/bin/p"    
+
+if  [ ! -f "$p_location" ]; then 
+    alias \
+	p='pacman --color=always' \
+	pls='pacman -Q | fzf' \
+	psz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | fzf" \
+	plsz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less" \
+	pds="pactree -c" \
+	pds="pactree -r" \
+	pfs="pacman -Ql" \
+	pfo="pacman -Qo" \
+	pqs="pacman -Q | grep" \
+	pup='yay -Qu' \
+	Pc='echo "sudo paccache -rk1..." && sudo paccache -rk1 && echo "Cache Cleaned, Leaving Latest Version" || echo "Something went wrong"' \
+	Pcc='echo "sudo pacman -Scc..." && sudo pacman -Scc && echo "Cache Cleared" || echo "Something went wrong"' \
+	ph='echo -e \
 "p	pacman
 P	sudo pacman
 pls	Search installed packages
@@ -59,15 +64,17 @@ pup	List upgradable packages
 Pc	Clean cache, keeping the latest version
 Pcc	Clear cache\n"'
 
-pbs () {
-    pacman -Ql | grep "$1$" | cut -f1 -d ' ' | uniq
-}    
+    pbs () {
+	pacman -Ql | grep "$1$" | cut -f1 -d ' ' | uniq
+    }    
 
-prs () {
-    [ -n "${1}" ] && 
-	pacman -Qi "$1" | grep 'Required By' ||
-	    echo "Please provide a package"
-}
+    prs () {
+	[ -n "${1}" ] && 
+	    pacman -Qi "$1" | grep 'Required By' ||
+		echo "Please provide a package"
+    }
+
+fi
 
 #-----------------------------------   XDG    -----------------------------------#
 # move?
