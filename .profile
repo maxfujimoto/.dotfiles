@@ -10,6 +10,7 @@ export PATH="${PATH}:/$HOME/.local/bin"
 export PATH="${PATH}:/$HOME/.local/bin/Aliases"
 export PATH="${PATH}:/$HOME/.local/bin/StatusBar"
 export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"
+export PATH="${PATH}:/home/max/.local/share/cargo/bin"
 # export DICS="/usr/share/stardict/dic/"
 
 # Default Programs
@@ -74,8 +75,9 @@ export GROFF_NO_SGR=1
 export MESA_VK_DEVICE_SELECT="10de:1290"
 # export LD_BIND_NOW=1		# preload shared libs for games Breaks Reaper
 export GAMEMODERUNEXEC='prime-run'
-export QT_QPA_PLATFORMTHEME='gtk3' # Have QT use gtk3 theme.
-# export QT_QPA_PLATFORMTHEME=qt5ct:qt6ct # Use qt5ct theme
+# export QT_QPA_PLATFORMTHEME='gtk3' # Have QT use gtk3 theme.
+export QT_QPA_PLATFORMTHEME=qt6ct # Use qt5ct theme
+# export QT_QPA_PLATFORMTHEME=qt6ct:qt5ct # Use qt5ct theme
 # export  XDG_CURRENT_DESKTOP='GNOME'	# Force qt apps to read gnome theme
 export AWT_TOOLKIT='MToolkit wmname LG3D' # May have to install wmname arduino ide fix
 export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
@@ -87,6 +89,8 @@ export XKB_DEFAULT_VARIANT=''
 # export XKB_DEFAULT_OPTIONS='caps:ctrl,escape:caps,ctrl:alt,alt:escape'
 export XKB_DEFAULT_OPTIONS=''
 
+XDG_SESSION_TYPE=x11
+GDK_BACKEND=x11 
 
 # Wayland
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then

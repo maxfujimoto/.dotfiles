@@ -4,6 +4,14 @@
 # ~/.xinitrc
 #
 
+
+
+# Start one D-Bus session for the entire X session
+if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ]; then
+    exec dbus-run-session -- "$0" "$@"
+fi
+
+
 # Wallpaper
 # wp="$HOME/Pictures/Wallpaper/Phone/phone-library_tower.jpg"
 wp="$HOME/Pictures/Wallpaper/Phone/xie_yixuan-shenshi_1.jpg"
@@ -11,28 +19,29 @@ wp1="$HOME/Pictures/Wallpaper/Space/jwst.webp"
 
 # Run Once
 # mondetect			# Detect monitors and laptop lid
-xrdb $HOME/.Xresources &	# load Xresources
-xmodmap $HOME/.Xmodmap &	# Key binds
+xrdb "$HOME/.Xresources" &	# load Xresources
+xmodmap "$HOME/.Xmodmap" &	# Key binds
 xset r rate 270 35 &		# Increase key repeat
 wifi off &			# replace with internetdetect
 mondetect
+monscale
 backlight 33 &
 # replace with monswitch or detect
 # xrandr --output eDP-1 --off --output VGA-1 --off --output HDMI-1 --off --output HDMI-2 --off --output DP-2-2 --rotate left --auto --right-of DP-2-2 --output DP-2-3 --off --output DP-2-1 --primary --auto 
 feh ---bg-fill "$wp1" --bg-fill "$wp" # set bg
-mv ~/.fehbg $XDG_CONFIG_HOME/feh/.fehbg # TODO: BG string to config
+mv ~/.fehbg "$XDG_CONFIG_HOME/feh/.fehbg" # TODO: BG string to config
 
 wait				# wait for jobs to finish
 
 # AutoStart --------------------------------------------------------------------------
 # Separated _AND APPENDED_ by '|'
-startlist="xcompmgr|dunst|pipewire|dwmblocks|emacs --daemon|unclutter -idle 7|"
+startlist="xcompmgr|dunst|pipewire|dwmblocks|emacs --daemon|unclutter -idle 7|qpwgraph -m|"
 
 IFSuser="$IFS"			# Save users IFS
 IFS='|'				# Set internal file separator to '|'
 auto_run () {
-    local prog="$(echo "$1" | awk '{print $1;}')" # Separate commands and Args
-    pidof -sx "$prog" || $program & # If no PID found, start
+    local prog="$(echo "$1" | awk '{print $1;}')" # Separate commands and Args TODO: remove local
+    pidof -sx "$prog" || "$@" & # If no PID found, start
 }
 
 for program in $startlist; do
@@ -46,13 +55,25 @@ IFS="$IFSuser"
 # --------------------------- DO NOT REMOVE THESE COMMENTS ---------------------------
 
 # Make and backup logs, run dwm with dbus
-while true; do
-    mv $HOME/.local/share/dwm/dwm.log $HOME/.local/share/dwm/dwm.old.log
-    [ ! -e "$HOME/.local/share/dwm/dwm.log" ] &&
-	mkdir -p $HOME/.local/share/dwm/ &&
-	touch $HOME/.local/share/dwm/dwm.log
-    dbus-launch --exit-with-session dwm 2> $HOME/.local/share/dwm/dwm.log
-done
+# while true; do
+#     mv "$HOME/.local/share/dwm/dwm.log" "$HOME/.local/share/dwm/dwm.old.log"
+#     [ ! -e "$HOME/.local/share/dwm/dwm.log" ] &&
+# 	mkdir -p "$HOME/.local/share/dwm/" &&
+# 	touch "$HOME/.local/share/dwm/dwm.log"
+#     dbus-update-activation-environment --all
+#     exec dbus-launch --exit-with-session dwm 2> "$HOME/.local/share/dwm/dwm.log"
+# done
+
+# dbus-run-session sh -c '
+# mkdir -p ~/.local/share/dwm
+# while true; do
+#     mv ~/.local/share/dwm/dwm.log ~/.local/share/dwm/dwm.old.log 2>/dev/null
+#     dwm 2> ~/.local/share/dwm/dwm.log || sleep 1
+# done
+# '
+mkdir -p "$HOME/.local/share/dwm"
+mv ~/.local/share/dwm/dwm.log ~/.local/share/dwm/dwm.old.log 2>/dev/null
+exec dwm 2> "$HOME/.local/share/dwm/dwm.log"
 
 # --------------------------- DO NOT REMOVE THESE COMMENTS ---------------------------
 # ------------------------------- ONLY IN .XINITRC END -------------------------------

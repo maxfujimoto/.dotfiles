@@ -32,7 +32,7 @@ alias \
     yass='yay -Ss'\
     p='pacman --color=always' \
     P='sudo pacman --color=always' \
-    ps='pacman -Q | fzf' \
+    pls='pacman -Q | fzf' \
     psz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | fzf" \
     plsz="pacman -Qi | grep -E '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less" \
     pds="pactree -c" \
@@ -46,7 +46,7 @@ alias \
     ph='echo -e \
 "p	pacman
 P	sudo pacman
-ps	Search installed packages
+pls	Search installed packages
 psz	Sort packages by size - fzf
 plsz	Sort packages by size - less
 pds	Display package dependencies
@@ -137,11 +137,19 @@ alias \
 #--------------------------------   Shorthand   --------------------------------#
 
 alias \
-    sp='spotify_player'
+    sp='spotify_player' \
+    ms='java -jar /home/max/Downloads/SRC/MixingStation/mixing-station-desktop.jar' \
+    pl='PIPEWIRE_LATENCY= ' \
+    pll='echo PIPEWIRE_LATENCY=\"64/48000\"; PIPEWIRE_LATENCY="64/48000"'
 
 #----------------------------------   Tools   ----------------------------------#
 
 alias fixfeh="$HOME/.config/feh/.fehbg"
+
+monscale1=""1.3x1.3""
+monscale2=84
+
+alias monscale="xrandr --output VGA-1 --off --output HDMI-1 --off --output HDMI-2 --off --output DP-2-1 --off --output DP-2-2 --rotate left --off --output eDP-1 --auto --scale $monscale1 --output DP-2-3 --auto --right-of eDP-1 "
 
 dswn () { "$@" & disown; }
 
@@ -208,7 +216,7 @@ alias \
     fdiff='diff --brief --recursive' \
     hist="cat $HISTFILE | fzf" \
     S='sudo "$BASH" -c "$(history -p !!)"' \
-    pr="prime-run" \
+    PR="DRI_PRIME=1" \
     dS='du -h --max-depth=1 | sort -h' \
     prff='prime-run firefox' \
     prtor='prime-run torbrowser-launcher' \
